@@ -169,6 +169,9 @@
         }
         slides[slideindex-1].style.display="block";
         dots[slideindex-1].className += " active";
+        slideindex++;
+        if(slideindex>slides.length){slideindex=1;}
+        setTimeout(showSlides, 3000, slideindex); 
     }
 </script>
 </html>
