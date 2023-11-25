@@ -1,1 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slideshow / Carousel</title>
+    <style>
+        *{box-sizing: border-box; margin: 0;}
+        .Slideshow{
+            width: 100%;
+            background-color: black;
+            max-height: 700px;
+            padding: 20px;
+        }
+        .slideshow-container{
+            max-width: 80%;
+            position: relative;
+            margin: auto;
+        }
+        .slides{display: none;}
+        .number-slide{
+            position: absolute;
+            top: 5px;
+            padding: 10px;
+            color: #090909;
+            font-size: 24px;
+        }
+        .image-slide{}
+        .image-slide img{width: 100%; max-height: 600px;}
+        .caption-slide{
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            padding: 8px 12px;
+            color: #090909;
+            text-shadow: 0 0 2px white;
+            font-size: 32px;
+        }
+        .fade{
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+        @keyframes fade{
+            from{opacity: .4;}
+            to{opacity: 1;}
+        }
+        .prev, .next{
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50%;
+            transition: .6 ease;
+            user-select: none;
+        }
+        .next{
+            right: 0;
+        }
+        .prev:hover, .next:hover{
+            background-color: rgba(0,0,0,.8);
+        }
+        .circle-Slide{text-align: center;}
+        .dot{
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            margin: 0 2px;
+            background-color: #bbb;
+            display: inline-block;
+            transition: background-color .6 ease;
+        }
+        .active, .dot:hover{
+            background-color: #535353;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <!-- Slideshow  -->
+    <section class="Slideshow">
+        <div class="slideshow-container">
+            <div class="slides fade">
+                <div class="number-slide">1 / 4</div>
+                <div class="image-slide">
+                    <img src="Images/1.jpg">
+                </div>
+                <div class="caption-slide">Special pizza</div>
+            </div>
+            <div class="slides fade">
+                <div class="number-slide">2 / 4</div>
+                <div class="image-slide">
+                    <img src="Images/2.jpeg">
+                </div>
+                <div class="caption-slide">VegiPizza</div>
+            </div>
+            <div class="slides fade">
+                <div class="number-slide">3 / 4</div>
+                <div class="image-slide">
+                    <img src="Images/3.jpeg">
+                </div>
+                <div class="caption-slide">Reyhoon Pizza</div>
+            </div>
+            <div class="slides fade">
+                <div class="number-slide">4 / 4</div>
+                <div class="image-slide">
+                    <img src="Images/4.jpeg">
+                </div>
+                <div class="caption-slide">Pepperoni Pizza</div>
+            </div>
 
+            <!-- Next and previous buttons -->
+             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            <!-- Slide  
+            <div class="slides fade">
+                <div class="number-slide"></div>
+                <div class="image-slide"></div>
+                <div class="caption-slide"></div>
+            </div>
+            -->
+
+        </div>
+        <br>
+        <!-- The dots/circles -->
+        <div class="circle-Slide">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+    </section>
+    
+</body>
+<script>
+    let slideindex = 1;
+    showSlides(slideindex);
+    function plusSlides(n){
+        showSlides(slideindex+=n);
+    }
+    function currentSlide(n){
+        showSlides(n);
+    }
+    function showSlides(n){
+        let i;
+        let slides = document.getElementsByClassName("slides");
+        let dots=document.getElementsByClassName("dot");
+        if(n>slides.length){slideindex=1;}
+        if(n<1){slideindex = slides.length}
+        for(i=0 ; i<slides.length ; i++)
+        {
+            slides[i].style.display = "none";
+        }
+        for(i=0 ; i<dots.length ; i++)
+        {
+            dots[i].className= dots[i].className.replace(" active","");
+        }
+        slides[slideindex-1].style.display="block";
+        dots[slideindex-1].className += " active";
+    }
+</script>
+</html>
